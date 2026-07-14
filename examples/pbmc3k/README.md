@@ -21,7 +21,7 @@ point is the process and the record, not the biology.
 | **6 Bio-sense** ★ | Do the clusters carry the expected PBMC markers (MS4A1 for B, CD3D for T, CD14 for monocytes, NKG7 for NK)? | [`docs/checkpoints.md`](docs/checkpoints.md) |
 | **7 Review** | Tests pass, and a clean re-run with a fixed seed gives the same result | `tests/` |
 | **8 Narrate** | A literate Quarto report that reads from `results/`, with every number traced to a file | [`report.qmd`](report.qmd) |
-| **9 Reflect** | A new concept (percent.mt as a QC axis) would go to the glossary or notes | — |
+| **9 Reflect** | A new concept (percent.mt as a QC axis) would go to the glossary or notes | n/a |
 
 ## Run it
 
