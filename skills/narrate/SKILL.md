@@ -19,6 +19,13 @@ the glossary's terms.
   environment (container digest / lockfile), date. Shareable / lab-notebook / proof of analysis.
 
 ## Rules
+- **Build every HTML deliverable to the standard** in `~/hub/knowledge/html-deliverable-standard.md`:
+  minimalist overview by default with expand-for-depth (hover a term for a one-line meaning, open a
+  "＋ Learn" unit for the concept/algorithm/tool with a worked example and its origin/etymology + memory
+  aid, "⟨/⟩ Show code" to verify); self-explanatory standing alone (define Arm A/B and every internal
+  label, spell out abbreviations at first use); neutral standard definitions; professional academic
+  grammar (tables/bullets welcome, no em dashes); clean code/math typesetting; a workflow overview
+  where it helps; self-contained, theme-aware, sticky TOC; single-source glossary from `CONTEXT.md`.
 - **Numbers must match** — verify every figure/statistic quoted in the prose equals the value in
   the `results/` file. No number may come from an AI chat computation — only from a script output.
 - Explain new concepts pedagogically (the user is learning); keep the firewall — show and explain

@@ -98,7 +98,10 @@ get it wrong and a survey masquerades as a decision record, or a real decision s
       checkable decisions; Obsidian = durable learning — two jobs in Survey mode, HTML dropped.
       Cross-linked, never duplicated.)
    c. **Human-readable review — Grounding sessions only, skip entirely for Survey.** Render an **Artifact** (load the `artifact-design` skill first) and
-      ALSO save the HTML into the repo at `docs/papers/literature-review.html`. Structure it so EVERY
+      ALSO save the HTML into the repo at `docs/papers/literature-review.html`, built to the HTML
+      deliverable standard (`~/hub/knowledge/html-deliverable-standard.md`): self-explanatory standing
+      alone (spell out every abbreviation at first use, define internal labels like Arm A/B in place),
+      minimalist + expand-for-depth, neutral definitions, professional grammar. Structure it so EVERY
       methodological decision and control step is explicit and checkable (decision → control it
       enforces → backing evidence + tier), plus the coverage log from step 3. The reader must be able
       to approve or challenge each decision without reading raw markdown.

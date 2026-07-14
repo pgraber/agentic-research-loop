@@ -25,6 +25,9 @@ Invoke the matching skill at each step. ★ = human checkpoint (get outputs in f
 decide) — logged as a dated, tagged section in `docs/checkpoints.html`. Fast lane: scope(one line) → build → output-qc(eyeball) → decide+commit.
 
 ## Rules
+- **`docs/checkpoints.html` follows the HTML deliverable standard** (`~/hub/knowledge/html-deliverable-standard.md`):
+  minimalist overview + expand-for-depth, self-explanatory (define Arm A/B and every label + abbreviation
+  at first use), a Concepts & methods learning layer, professional grammar, self-contained + theme-aware.
 - **Commit per approved checkpoint** via `decide` (record rides with the change).
 - **Deterministic compute** — the analysis is code (scripts/containers); AI never in the compute path.
 - **Never skip a ★ checkpoint** silently. If a checkpoint fails, loop back to design or build.
