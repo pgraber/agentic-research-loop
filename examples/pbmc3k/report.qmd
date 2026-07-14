@@ -1,0 +1,53 @@
+---
+title: "PBMC 3k: QC and clustering"
+format:
+  html:
+    toc: true
+    embed-resources: true
+---
+
+## What this is
+
+A short write-up of the PBMC 3k walkthrough. It reads the results produced by
+`scripts/01_qc_cluster.R` and explains each step. In the full system this same source renders twice,
+once as a learning version with the code and concept notes shown, and once as a clean report with the
+code folded and a provenance footer. Here it is kept as one simple document.
+
+Every number below is read from a file in `results/`. None of it is typed in by hand.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+qc <- read.csv("results/qc_summary.csv")
+markers <- read.csv("results/marker_avg_expression.csv", row.names = 1)
+```
+
+## Quality control
+
+Cells were kept using the thresholds pre-registered at the design step: 200 to 2500 genes, and
+mitochondrial content below 5 percent. The filter logic is a unit-tested pure function rather than
+inline code, so the decision that sets the numbers is verified on its own.
+
+```{r qc}
+qc
+```
+
+`r qc$n_cells_pass` of `r qc$n_cells_loaded` cells passed, and clustering at resolution 0.5 gave
+`r qc$n_clusters` clusters.
+
+## Does it make biological sense?
+
+The check is whether the canonical PBMC markers land where the biology says they should.
+
+```{r markers}
+knitr::kable(round(markers, 2))
+```
+
+High CD3D marks the T cells, MS4A1 the B cells, CD14 the monocytes, NKG7 the NK cells, and PPBP the
+platelets. If those line up, the clustering is believable. If they scatter, the loop goes back a step
+before anything is trusted.
+
+## Reproducibility
+
+Re-running `scripts/01_qc_cluster.R` with the same seed gives the same result. In a real project this
+runs inside a pinned container, and the report carries a provenance footer with the commit and the
+environment.
