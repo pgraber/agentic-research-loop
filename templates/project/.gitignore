@@ -1,0 +1,28 @@
+# Generated / large — regeneratable, never committed (raw master lives on the volume)
+data/
+results/
+figures/
+env/*.sif
+env/*.tar
+
+# Workflow / compute caches
+work/
+.nextflow*
+_targets/
+_freeze/
+.quarto/
+_cache/
+
+# R / Python
+.Rhistory
+.RData
+*.rds
+*.Rout
+__pycache__/
+*.py[cod]
+
+# OS
+.DS_Store
+
+# Keep the empty skeleton dirs
+!**/.gitkeep

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Commit + push any skill changes so git stays up to date.
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$DIR"
+if git diff --quiet && git diff --cached --quiet; then
+  echo "nothing to sync."
+  exit 0
+fi
+git add -A
+msg="${1:-skills: update $(date +%Y-%m-%d)}"
+git commit -q -m "$msg"
+
+# --- leak guard: this repo is PUBLIC. Refuse to push if a personal/institution token reappears.
+# Blocks real leaks (absolute home paths, the archive volume, institution names, email, private IDs)
+# WITHOUT tripping on the intended GitHub URL (github.com/pgraber/...) or the LICENSE author name.
+LEAK='(/Users/|/Volumes/ResDept|ccia\.org\.au|Children.?s Cancer|\bCCIA\b|\bUNSW\b|zccs135|H3K27M)'
+# exclude config.example.yml (documents the tiers) and this script itself (holds the denylist).
+if git grep -nIE "$LEAK" -- ':!config.example.yml' ':!bin/sync' >/dev/null 2>&1; then
+  echo "PUSH BLOCKED — personal/institution token found:" >&2
+  git grep -nIE "$LEAK" -- ':!config.example.yml' ':!bin/sync' >&2
+  echo "Generalize it (config-driven) before pushing this PUBLIC repo." >&2
+  exit 1
+fi
+
+git push -q 2>&1 || { echo "committed locally; push failed (offline?). Push later."; exit 0; }
+echo "synced: $msg"

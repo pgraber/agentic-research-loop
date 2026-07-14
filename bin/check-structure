@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# check-structure — deterministic, READ-ONLY report of a project's layout vs the template
+# and how/where it's wired. Diagnosis only; it never moves, deletes, or creates anything.
+# Usage: check-structure [project-dir]   (default: current directory)
+set -euo pipefail
+
+HUB="${RESEARCH_HUB:-$HOME/hub}"
+CFG="$HUB/config.yml"
+SELF="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+TEMPLATE="$SELF/templates/project"
+PROJ="$(cd "${1:-$PWD}" && pwd)"
+
+# pull a path value from config.yml (simple "key: value" under paths:)
+cfg() { grep -E "^[[:space:]]*$1:" "$CFG" 2>/dev/null | head -1 | sed -E "s/^[^:]*:[[:space:]]*//; s/[[:space:]]*#.*//; s/[[:space:]]*$//"; }
+VOLUME="$(cfg volume || true)"
+WORKSPACE="$(cfg workspace || true)"
+
+echo "== check-structure: $PROJ =="
+
+echo; echo "-- layout vs template --"
+( cd "$TEMPLATE" && ls -A ) | grep -v '^\.gitkeep$' | while read -r e; do
+  if [ -e "$PROJ/$e" ]; then printf "  ok       %s\n" "$e"; else printf "  MISSING  %s\n" "$e"; fi
+done
+( cd "$PROJ" && ls -A ) | grep -vE '^\.(git$|DS_Store$)' | while read -r e; do
+  [ -e "$TEMPLATE/$e" ] || printf "  extra    %s\n" "$e"
+done
+
+echo; echo "-- wiring --"
+case "$PROJ" in
+  "${WORKSPACE:-__na__}"*) echo "  tier:    fast local (WORK) ✓";;
+  "${VOLUME:-__na__}"*)    echo "  tier:    institute volume (ARCHIVE) — slow; analysis should live in WORK tier";;
+  *)                       echo "  tier:    outside configured workspace/volume";;
+esac
+if [ -f "$PROJ/data/raw/PROVENANCE.md" ]; then echo "  data:    PROVENANCE.md present"; else echo "  data:    no PROVENANCE.md (raw source not recorded)"; fi
+if [ -d "$PROJ/data/raw" ] && [ -w "$PROJ/data/raw" ]; then echo "  raw:     WRITABLE — should be read-only (chmod -R a-w)"; fi
+if git -C "$PROJ" rev-parse --git-dir >/dev/null 2>&1; then
+  r="$(git -C "$PROJ" remote -v 2>/dev/null | awk 'NR==1{print $2}')"
+  echo "  git:     ${r:-no remote (not backed up)}"
+else
+  echo "  git:     not a git repo"
+fi
+if ls "$PROJ"/env/* >/dev/null 2>&1; then echo "  env:     $(ls "$PROJ"/env | tr '\n' ' ')"; else echo "  env:     empty (no container recipe/lockfile)"; fi
+[ -n "$VOLUME" ] && echo "  archive→ $VOLUME/$(basename "$PROJ")/results-archive"
+
+echo; echo "(read-only. fix missing → adopt-project · rearrange/clean → librarian/archivist, confirmed)"

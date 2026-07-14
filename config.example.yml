@@ -1,0 +1,38 @@
+# config.example.yml — copy to your own config (e.g. ~/hub/config.yml) and fill in.
+#
+# This is the SINGLE place every environment-specific path, entitlement, and credential
+# LOCATION lives. Skills and scripts READ paths from here — they never hardcode a location or an
+# institution. Adapting to a new machine or institution = edit THIS file only; nothing else changes.
+#
+# The one bootstrap constant is where this file lives (default ~/hub/config.yml).
+# NEVER put actual secrets (API keys, tokens) here — only the PATH to the file that holds them.
+#
+# Key names below are generic despite a couple of legacy labels (e.g. `onedrive_docs` is simply the
+# "cloud docs" tier — OneDrive, Dropbox, Drive, anything). Rename freely if you prefer; just keep
+# your config in sync with any skill that reads a key.
+
+paths:
+  workspace:     /path/to/workspace   # fast local disk: where all git repos and active analysis live
+  hub:           /path/to/hub         # your personal cockpit (direction, decisions, knowledge) — keep PRIVATE
+  volume:        ""                    # OPTIONAL archive tier (institute/network storage) for raw data + final outputs; "" if none
+  onedrive_docs: ""                    # OPTIONAL cloud-docs tier (OneDrive/Dropbox/Drive) for deliverables + reference; "" if none
+  obsidian:      ""                    # OPTIONAL personal notes vault (e.g. Obsidian) for the learning layer; "" if none
+  endnote_data:  ""                    # OPTIONAL reference-manager data dir (EndNote/Zotero) for PDFs + citations; "" if none
+  secrets:       /path/to/.env         # file holding API keys as shell env vars (chmod 600, git-ignored) — path only, never the keys
+
+git:
+  # Default-deny cloud: nothing is pushed to a cloud remote unless a repo is explicitly cleared.
+  default_remote: local                # local | github | gitlab | volume-bare
+  remote_path:    ""                    # e.g. a bare repo on institute-controlled storage, if using volume-bare
+
+env:
+  runtime: containers                  # containers (Docker local / Singularity on HPC) | renv | uv | pixi | conda
+                                       # the built image / lockfile is the single reproducible artifact
+
+literature:
+  # Which sources the literature skill may use, by access class. Institution-agnostic:
+  # name whatever your institution actually subscribes to; leave lists you don't have empty.
+  full_text_on_vpn:  []                # publishers whose full text needs YOUR institution's VPN (e.g. [elsevier])
+  full_text_keyless: [springer_oa, europepmc, unpaywall, biorxiv]   # open, no key
+  discovery:         [pubmed, openalex, crossref]                    # find papers
+  triage:            [consensus, elicit]                             # AI-assisted synthesis over abstracts (treat as triage)

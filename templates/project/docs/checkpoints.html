@@ -1,0 +1,120 @@
+<title>Checkpoints — <NAME></title>
+<style>
+  :root{
+    --bg:#f5f7f6;--surface:#fff;--ink:#161f1d;--muted:#586a65;--border:#e2e7e3;
+    --accent:#0e6e69;--accent-soft:#dcefec;--warn:#b26426;--warn-soft:#f6ead9;
+    --good:#2c7d57;--good-soft:#dcefe4;
+  }
+  @media (prefers-color-scheme:dark){:root{--bg:#101514;--surface:#171e1c;--ink:#e7ece9;--muted:#93a49e;
+    --border:#28322f;--accent:#45b9ad;--accent-soft:#123330;--warn:#d59152;--warn-soft:#2c2418;
+    --good:#4fb383;--good-soft:#13291f}}
+  :root[data-theme="dark"]{--bg:#101514;--surface:#171e1c;--ink:#e7ece9;--muted:#93a49e;
+    --border:#28322f;--accent:#45b9ad;--accent-soft:#123330;--warn:#d59152;--warn-soft:#2c2418;
+    --good:#4fb383;--good-soft:#13291f}
+  :root[data-theme="light"]{--bg:#f5f7f6;--surface:#fff;--ink:#161f1d;--muted:#586a65;--border:#e2e7e3;
+    --accent:#0e6e69;--accent-soft:#dcefec;--warn:#b26426;--warn-soft:#f6ead9;--good:#2c7d57;--good-soft:#dcefe4}
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:Georgia,"Iowan Old Style",serif;line-height:1.6;margin:0}
+  .wrap{display:flex;flex-direction:column;max-width:900px;margin:0 auto;
+    padding:clamp(1.2rem,4vw,3rem) clamp(1rem,4vw,2rem)}
+  .main{min-width:0}
+  @media (min-width:1180px){
+    .wrap{flex-direction:row;align-items:flex-start;gap:2.5rem;max-width:1180px}
+    .main{flex:1 1 auto;max-width:900px;order:1}
+    .toc{flex:0 0 240px;max-width:240px;order:2;margin:0;
+      position:sticky;top:1.6rem;max-height:calc(100vh - 3.2rem);overflow-y:auto}
+  }
+  h1{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:1.8rem;font-weight:800;margin:.2em 0 .3em}
+  h2{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:1.15rem;font-weight:750;margin:2rem 0 .4rem}
+  p{margin:.6rem 0}
+  a{color:var(--accent)}
+  .eyebrow{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;text-transform:uppercase;
+    letter-spacing:.1em;font-size:.68rem;font-weight:700;color:var(--muted)}
+  nav.toc{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.3rem;margin:1.2rem 0}
+  nav.toc ol{margin:.3rem 0;padding-left:1.2rem}
+  nav.toc li{margin:.6rem 0}
+  nav.toc .sub{display:block;color:var(--muted);font-size:.78rem;font-weight:400;margin-top:.1rem}
+  .chip{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:.66rem;font-weight:700;
+    padding:.2rem .5rem;border-radius:999px;background:var(--accent-soft);color:var(--accent);
+    display:inline-block;margin-right:.4rem;vertical-align:middle;white-space:nowrap}
+  .status{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 1.6rem}
+  .step{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:.78rem;font-weight:600;
+    padding:.35rem .7rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);white-space:nowrap}
+  .step.done{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+  .step.pending{color:var(--warn);border-color:var(--warn);background:var(--warn-soft)}
+  .step.todo{color:var(--muted)}
+  .entry{border-top:2px solid var(--border);padding-top:1.2rem;margin-top:2rem}
+  .placeholder{color:var(--muted);font-style:italic}
+  details{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.6rem .8rem;margin:.6rem 0}
+  details summary{cursor:pointer;font-weight:700;font-size:.9rem;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+  body.plain-only details{display:none}
+  pre{overflow-x:auto;background:var(--accent-soft);border-radius:8px;padding:.7rem .9rem;font-size:.82rem}
+  code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+</style>
+
+<div class="wrap">
+
+  <nav class="toc" id="toc" aria-label="Table of contents">
+    <span class="eyebrow">Contents</span>
+    <ol>
+      <li class="placeholder">No checkpoints logged yet — the first design/QC/bio-sense pass adds
+      a section here and a link in this list.</li>
+    </ol>
+  </nav>
+
+  <main class="main">
+
+  <div class="toolbar" style="display:flex;justify-content:space-between;align-items:center;gap:.5rem">
+    <span class="eyebrow"><NAME></span>
+    <button id="mode" aria-pressed="false" style="font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+      font-size:.8rem;font-weight:600;cursor:pointer;background:var(--surface);color:var(--ink);
+      border:1px solid var(--border);padding:.35rem .7rem;border-radius:8px">Plain language</button>
+  </div>
+
+  <h1>Checkpoints</h1>
+  <p>Every design choice, QC look, or bio-sense read that needed a human call, logged here as one
+  dated section per checkpoint instead of a separate file each time.</p>
+
+  <span class="eyebrow">Loop status (updated by whichever skill runs each step — not interactive,
+  edited + committed like everything else here)</span>
+  <div class="status">
+    <span class="step todo">Scope</span>
+    <span class="step todo">Literature</span>
+    <span class="step todo">Intake-QC</span>
+    <span class="step todo">Design</span>
+    <span class="step todo">Build</span>
+    <span class="step todo">Output-QC</span>
+    <span class="step todo">Bio-sense</span>
+    <span class="step todo">Reviewing-analysis</span>
+    <span class="step todo">Narrate</span>
+  </div>
+
+  <!-- New checkpoints: append a dated <div class="entry" id="cp-YYYY-MM-DD-slug"> section here, and
+       add its title + one-line summary as a new <li> in the Contents nav above, plus update the
+       matching chip in the status strip (done/pending/todo, link href="#cp-...").
+
+       SELF-CONTAINED, NOT A LINK TABLE: put the actual substance — findings, tables, code
+       snippets — inline inside each entry, wrapped in <details> so it's toggleable via the
+       "Plain language" button above (hides <details> when in plain-only mode). Link only to raw
+       source (a script path, a results file, an ADR) — never summarize-and-link to a separate
+       polished HTML "detail" document; that breaks self-containment and defeats the point of one
+       file. No separate code-review file either: ad hoc /code-review or /review during build is
+       git's job (the commit is the trail); reviewing-analysis's final correctness+reproducibility
+       check gets ONE status line here ("✓ reviewed & reproducible, commit <sha>"), not a log.
+
+       Tag each entry by kind: Design / Intake QC / Output QC / Bio-sense / (rarely) Code review
+       for an escalated judgment call. Keep entries newest-last (chronological) or reorder if a
+       later reader benefits from grouping by kind — either way, the Contents nav must always
+       match the sections present. -->
+
+  </main>
+
+</div>
+
+<script>
+  (function(){
+    var m=document.getElementById("mode");
+    m.addEventListener("click",function(){var on=document.body.classList.toggle("plain-only");
+      m.setAttribute("aria-pressed",on?"true":"false"); m.textContent=on?"Full detail":"Plain language";});
+  })();
+</script>

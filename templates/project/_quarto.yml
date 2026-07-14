@@ -1,0 +1,9 @@
+project:
+  type: default
+
+format:
+  html:
+    toc: true
+    lightbox: true      # click-to-expand figures (standing convention)
+    embed-resources: true   # self-contained HTML (safe to share; no _files/ sprawl)
+    code-fold: true
