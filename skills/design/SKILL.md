@@ -24,7 +24,7 @@ caused the two biggest rework episodes on record. THEN:
 2. **Screen the tool** — invoke `checking-current-docs` to fetch current official docs and pin the
    version. Never write syntax from training-data memory.
 3. **Pre-register QC thresholds** now (FDR, min genes/cell, fold-change, etc.), before results
-   exist. These are what `output-qc` checks against.
+   exist. These are what the output-QC checkpoint (run inline in `research-loop`) checks against.
 4. **Pre-register the validation fixtures + tolerances** now, same anti-gaming logic — decide the
    yardstick BEFORE seeing the result. Testing is three tiers; name what applies:
    - **Unit** — the deterministic pure functions this analysis introduces (transforms, metrics,
@@ -33,7 +33,7 @@ caused the two biggest rework episodes on record. THEN:
      reproduce (e.g. a published label set, a prior table, a long-vs-short concordance). Acceptance
      test, not unit — record the source, the metric, and the pass/fail tolerance.
    - **Biological controls** — housekeeping stability, expected markers; these stay the human
-     `output-qc`/`bio-sense` checkpoints, not automated. Note which controls apply.
+     output-QC / bio-sense checkpoints (run inline in `research-loop`), not automated. Note which controls apply.
    (Generic SDD skills like `to-prd`/`to-issues` are NOT the spec here — `brief.md` + ADRs are.)
 5. **ADR if warranted** — for a hard-to-reverse choice or a real trade-off, write an ADR in
    `docs/adr/` (per the project's convention). Small calls just get a `decide` log line.

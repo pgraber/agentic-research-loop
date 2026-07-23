@@ -1,6 +1,6 @@
 ---
 name: intake-qc
-description: Checks whether input data is sound before analysis — file integrity, expected sample and read counts, metadata completeness, sample-ID consistency, failed lanes, and contamination. Use right after data lands in a project and before designing or running the analysis. A human checkpoint; distinct from output-qc which checks results.
+description: Checks whether input data is sound before analysis — file integrity, expected sample and read counts, metadata completeness, sample-ID consistency, failed lanes, and contamination. Use right after data lands in a project and before designing or running the analysis. A human checkpoint; distinct from the output-QC checkpoint (run inline in research-loop) which checks results.
 ---
 
 # Intake-QC — is the DATA sound? (before analysis)

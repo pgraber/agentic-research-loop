@@ -12,7 +12,7 @@ No stored state — infer everything from the filesystem, so it's always accurat
    `docs/.record/question.md`? → scoped · `.record/brief.md`? → grounded · intake report? · `results/` populated? ·
    QC report? · tagged figure? · `notebooks/*.qmd`? → narrated.
 2. Print the loop with a "▶ YOU ARE HERE" marker and note which lane (fast/full).
-3. Name the **next command** (e.g. "results present, not QC'd → run `output-qc`").
+3. Name the **next command** (e.g. "results present, not QC'd → resume `research-loop` at the output-QC checkpoint").
 
 ## Portfolio (across projects)
 Scan the project directories (`~/hub/config.yml` → `paths.workspace`) and summarise each project's

@@ -8,6 +8,13 @@ description: Captures learnings at the end of an analysis — new concepts into 
 The loop's closing step. Turns each analysis into durable, reusable knowledge so nothing has to be
 re-learned.
 
+**This is the capture that actually works — route "update the md" / "remember this" through here.**
+In practice durable learning lands not by invoking this skill by name but by the user saying "add that
+to the md" or "remember this"; treat those as this step. Capture channels by kind: behavioural
+rules/preferences → the relevant `CLAUDE.md` (global or project, the auto-loaded layer); reusable
+concepts → Obsidian + `.record/CONTEXT.md`; hard-to-reverse decisions → an ADR; durable cross-session
+facts → a memory file. Keep it light; the point is that capture happens, not ceremony.
+
 **Read the record first.** Before capturing, read the existing `.record/CONTEXT.md`, `docs/.record/decisions.md`,
 and `docs/adr/` so you extend the record rather than duplicating entries already there.
 
