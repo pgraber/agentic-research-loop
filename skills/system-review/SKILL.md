@@ -33,8 +33,10 @@ prior-review baseline so it reports what is NEW or CHANGED. Require verbatim quo
 
 **4 · Synthesise and be the skeptic.** Rank pitfalls by leverage; separate what genuinely works
 (keep it) from what to change. Grade every proposed change against the north-star goals AND non-goals
-(no infra I can't maintain, don't over-engineer, no results I can't explain). Run an adversarial pass:
-challenge each item against the non-goals before it survives. Own any overstatement from a prior pass.
+(no infra I can't maintain, don't over-engineer, no results I can't explain). Run the adversarial pass
+as a SEPARATE step, not folded into synthesis: challenge each surviving item against the non-goals on
+its own, so findings are graded blind rather than waved through in the same breath that generates them.
+Own any overstatement from a prior pass.
 
 **5 · Produce the decision brief** as `~/hub/reviews/<YYYY-MM-DD>-system-review.html` (date from the
 system clock via `date`), to the HTML deliverable standard (`~/hub/knowledge/html-deliverable-standard.md`):

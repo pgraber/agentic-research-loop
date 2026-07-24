@@ -26,8 +26,10 @@ the glossary's terms.
   label, spell out abbreviations at first use); neutral standard definitions; professional academic
   grammar (tables/bullets welcome, no em dashes); clean code/math typesetting; a workflow overview
   where it helps; self-contained, theme-aware, sticky TOC; single-source glossary from `CONTEXT.md`.
-- **Numbers must match** — verify every figure/statistic quoted in the prose equals the value in
-  the `results/` file. No number may come from an AI chat computation — only from a script output.
+- **Numbers must match** — as a SEPARATE trace-check after the prose is drafted, not folded into
+  writing it: go statistic by statistic and confirm every figure/number quoted equals the value in
+  the `results/` file, reading the value fresh from the file rather than trusting what you just wrote.
+  No number may come from an AI chat computation — only from a script output.
 - Explain new concepts pedagogically (the user is learning); keep the firewall — show and explain
   the deterministic code, never recompute in prose.
 - Render locally; sync only the final self-contained HTML/PDF to the cloud-docs tier (config `paths.onedrive_docs`; avoid many-small-files).

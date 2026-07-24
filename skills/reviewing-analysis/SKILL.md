@@ -9,7 +9,9 @@ The last check before a result becomes final. Combines existing review tools wit
 specific reproducibility check.
 
 ## Do
-1. **Code review** — run `/code-review` on the analysis changes; address correctness findings.
+1. **Code review** — run `/code-review` on the analysis changes as an INDEPENDENT pass: it reviews
+   the diff cold, blind to the reasoning that produced it, rather than the build agent signing off on
+   its own work. Address correctness findings.
 2. **Verify + tests** — run `/verify`; ensure unit/edge tests pass (`tdd`). Per the user's
    CLAUDE.md, a result isn't done if tests are missing or failing.
 3. **Reproducibility check** — clean-room re-run *from scratch in the pinned container*
