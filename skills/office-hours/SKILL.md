@@ -1,23 +1,35 @@
 ---
 name: office-hours
-description: The fast chief-of-staff entry point to the whole working life. Reads the north-star, scans the portfolio, says what moves the goals, then classifies the work-type (analysis, software, writing, admin, learning, system) and routes to the right track — invoking the downstream skill so the user never has to know skill names. Use at the start of a session, for "what should I work on", to triage any new task or idea, or on /office-hours. Keep it brief; deep planning happens downstream, not here.
+description: Answers "what should I work on" when the user genuinely does not know. Weighs the current portfolio state against the north-star, spot-verifies the record against the artifacts it cites, names the one thing that moves a goal, and opens that track. NOT the default session opener where a SessionStart hook already injects portfolio state: when the user names the work, do that work instead of invoking this. Use on /office-hours, or when the user asks where to start or what matters most.
 ---
 
-# Office Hours — the chief-of-staff (route, don't interrogate)
+# Office Hours — answer "what should I work on", then start it
 
-The top layer over the whole working life, not just analysis. Think chief-of-staff: keep the user
-(the CEO) on the north-star, look across everything, say what actually moves the goals, then hand the
-work to the right track and start it. This is FAST — seconds, not a session. The deep thinking lives
-DOWNSTREAM inside each track (scope + grill for analysis, a spec grill for software, a planning beat
-for writing). Do NOT run a long Q&A here; that is the mistake this layer is meant to avoid.
+**Scope, narrowed 2026-08-12.** Where the setup injects portfolio state at session start (this one
+does, through a `SessionStart` hook feeding from the cockpit generator), every stream's position, the
+queue, the goals and the priority rule are already in context before the user types. The original job
+of reporting where things stand is therefore done, and invoking this skill to repeat it wastes a turn
+and reads as interrogation.
 
-## On invocation (quick)
-1. Read `~/hub/north-star.md` (goals + non-goals), `~/hub/ideas.md`, `~/hub/decisions.md`.
-2. Scan project workspaces (`~/hub/config.yml` → `paths.workspace`) for state — active, mid-loop,
-   stalled. Spot-verify one load-bearing record claim against the artifact it cites (does the
-   file/path exist and match?) rather than trusting a possibly-stale note. Ignore hook-generated
-   sessions (automated `security-review` commits) when judging how "active" a project is.
-3. Give a crisp read: where you are, what moves a goal now, what drifts from a non-goal. One pass.
+**When the user names the work, do the work.** Do not open this skill to confirm a choice already
+made, and never ask a routing question whose answer is in the message that triggered it. The failure
+mode is real and was observed twice in a single session: the skill fired, asked which track to open,
+and the user ignored the question and stated the task directly.
+
+What remains is the case an injected status block cannot serve: the user does not know where to
+start, or wants the portfolio weighed rather than listed. That is a real need and this is where it is
+met.
+
+## On invocation (fast, one pass)
+1. Use the injected state if the setup provides one. Do NOT re-read each repository or re-derive
+   stream status. Read the north-star and the decisions log for the goals, non-goals and settled
+   calls that a status block does not carry.
+2. **Spot-verify one load-bearing record claim against the artifact it cites.** Does the file exist,
+   and is it newer or older than the note claims? This is the highest-value step here and the one
+   nothing else does. In practice it catches a "resume exactly here" pointer that later sessions have
+   silently overtaken. Ignore hook-generated commits when judging how active something is.
+3. Say, in a few lines: where things stand, the one thing that most moves a goal now, and anything
+   drifting into a non-goal. Then open that track. One pass, no interrogation.
 
 ## Classify the work, then dispatch
 Name the work-type and route to its track. **Every track carries its own domain-appropriate rigor.**
@@ -31,7 +43,8 @@ domain's machinery onto another.
 |---|---|---|
 | Bioinformatics question or data | `research-loop` | `scope` (+ offer a grill) before any build |
 | Software / tool / add-on / agent / script-as-product | light software track: start with `grill-with-docs` (spec + ADR), then `tdd` / `diagnose` / `review`; keep a `.record/` layer | the spec grill IS the planning |
-| Writing / manuscript / talk / poster | `writing-fragments` → `writing-shape` / `writing-beats` / `edit-article`; `narrate` for methods from an analysis | shape/beats decisions |
+| **Scientific paper** — journal manuscript, a Results/Discussion section, abstract, figure caption, reviewer response | `manuscript` | the per-section loop IS the planning (read record → read figure → list issues → discuss → edit → check → merge to Word) |
+| Other writing — article, essay, talk, poster | `writing-fragments` → `writing-shape` / `writing-beats` / `edit-article`; `narrate` for methods from an analysis | shape/beats decisions |
 | Admin / ops / grants / teaching / the daily digest | `admin-tasks` (routes to the user's own Argus / SWP tools + OneDrive) | none; keep thin |
 | Learning capture | the working path: update `CLAUDE.md` / Obsidian (and `reflect` at a loop's close) | n/a |
 | Review or tune THIS system | `system-review` (until it exists, run the review here) | n/a |
@@ -47,6 +60,14 @@ domain's machinery onto another.
   version regressions · a de-personalisation / release check before any external push.
 - **Writing:** every claim evidence-backed and traceable · citations verified (`literature`) · no
   overclaiming · house style (no em dashes, no meta-narration) · figures/numbers trace to the record.
+- **Scientific paper (`manuscript`):** the writing checks above, plus ones that fire mechanically —
+  topic-sentence test (read only each paragraph's first sentence; the story must be there) · sentences
+  under 30 words · paragraphs under 500 · Results carry interpretation of the data in hand but never
+  against outside knowledge · numbers reported ICMJE-style (absolute value and spread before the
+  standardized statistic, never a bare Cohen's d) · every number traced to a named results file and
+  none from a superseded analysis · every cited supplementary item exists · venue conventions looked
+  up, never assumed · the Word merge closes each section, field codes and comments intact.
+  Full contract: `~/hub/knowledge/scientific-writing.md`.
 - **Admin/ops:** consequential decisions recorded so none evaporate · approval before external
   actions · deadlines tracked. Thin, but the record rigor is real.
 
