@@ -14,7 +14,7 @@ single source of truth). Add what's MISSING; never move existing files (that's a
 1. Inspect the repo — note what already exists (scripts, data, results, git).
 2. **Add ONLY the missing pieces** from the template (copy individual files/dirs that are absent):
    `.record/CONTEXT.md`, `docs/checkpoints.html`, `docs/.record/{brief,decisions}.md`,
-   `docs/{adr/,papers/,notebooks/}`, `env/`, `figures/`, `.gitignore`
+   `docs/{adr/,papers/,notebooks/}`, `env/`, `figures/`, `scripts/validate.{R,py,sh}`, `.gitignore`
    entries, and a project `CLAUDE.md`. Do not overwrite anything that exists.
 3. If raw data is edited-in-place anywhere, flag it — propose a read-only `data/raw/` copy
    (chmod a-w + `chflags uchg`) + `PROVENANCE.md`. Do not move data without the `archivist`.

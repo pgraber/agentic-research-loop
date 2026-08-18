@@ -20,12 +20,18 @@ never a new file per decision. Fast lane for a tiny check: scope → build → o
 - **Reproducible compute.** Run in a container (Docker local / Singularity on HPC), digest-pinned;
   recipe + lockfile in `env/`. The AI is never in the compute path.
 - **Pre-register QC thresholds** at `design`, before results exist. Deviations require an ADR.
+- **Validate continuously.** Every script asserts the shapes it can know in advance (feature counts,
+  sample counts, IDs preserved across a join, sums, ranges) right after the step that produces them,
+  using `scripts/validate.{R,py,sh}`. The expected value comes from outside the code that produced the
+  object (annotation, sample sheet, instrument report) and is pre-registered at `scope`/`design`. A
+  FAIL stops the run. Every run writes `results/checks.log` and `results/checks.tsv`, and that table
+  heads every checkpoint and deliverable. Contract: `~/hub/knowledge/validation.md`.
 - **Commit per approved checkpoint** (`/decide`) — the record rides with the code; tag figures.
 - **Fetch current official docs** before writing tool syntax (`/checking-current-docs`).
 - **Numbers in prose must trace to a results file** — never an AI chat computation.
 
 ## Structure
-`data/` (raw, read-only) · `results/` (gitignored) · `figures/` · `scripts/` · `env/` (container) ·
+`data/` (raw, read-only) · `results/` (gitignored, holds `checks.log`/`checks.tsv`) · `figures/` · `scripts/` (analysis + `validate.{R,py,sh}`) · `env/` (container) ·
 `workflow/` (optional, project-specific pipeline — any manager) ·
 `docs/checkpoints.html` (every human checkpoint, TOC'd, one file) ·
 `docs/{adr/,papers/,notebooks/}` (adr/ visible — a standard artifact, not working log) ·

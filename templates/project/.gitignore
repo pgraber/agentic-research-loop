@@ -1,7 +1,14 @@
 # Generated / large — regeneratable, never committed (raw master lives on the volume)
 data/
-results/
 figures/
+
+# results/ is regeneratable and stays out of git, EXCEPT the validation record, which is the audit
+# trail that each run's data had the right shape. The `!results/` line is required because a global
+# ignore also excludes the directory, and git will not descend into an excluded directory.
+!results/
+results/*
+!results/checks.log
+!results/checks.tsv
 env/*.sif
 env/*.tar
 

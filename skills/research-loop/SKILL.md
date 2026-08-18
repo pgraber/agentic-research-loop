@@ -32,6 +32,11 @@ decide+commit.
 
 ### ▸ OUTPUT-QC checkpoint ★ — do the RESULTS make sense? (after build)
 Catch garbage-out before it becomes a conclusion. Produce a legible report; the user looks and decides.
+0. **Read `results/checks.tsv` FIRST and render it as the validation table at the top of the
+   checkpoint section** (check, expected, observed, status, source), taken from the file rather than
+   retyped. A `FAIL` fails the checkpoint outright. A `WARN` must be explained here. An empty or
+   missing `checks.tsv` also fails it: the build did not validate anything, so no number below it is
+   trustworthy. Contract: `~/hub/knowledge/validation.md`.
 1. Run a metric script over `results/` (deterministic firewall: script computes, you interpret):
    distributions, marker genes, cluster/DE counts, effect sizes, n.
 2. **Compare against the thresholds pre-registered in `design`** — never thresholds invented now.
@@ -69,6 +74,10 @@ biological nonsense (or an artefact). Surface the comparison; the user makes the
   at first use), a Concepts & methods learning layer, professional grammar, self-contained + theme-aware.
 - **Commit per approved checkpoint** via `decide` (record rides with the change).
 - **Deterministic compute** — the analysis is code (scripts/containers); AI never in the compute path.
+- **Every build script validates as it runs** — it initialises a log (`scripts/validate.{R,py,sh}`,
+  or the same `checks.log`/`checks.tsv` format from any other language) and asserts each shape
+  pre-registered at `scope`/`design` immediately after the step that produces it. A `FAIL` stops the
+  run rather than warning. An analysis with no checks does not reach output-QC.
 - **Never skip a ★ checkpoint** silently. If a checkpoint fails, loop back to design or build.
 - **Flag engineering-driven parameter changes** at the Build handoff — a threshold/filter changed
   for memory or runtime (not science) is surfaced and `decide`-logged before any result is reported.

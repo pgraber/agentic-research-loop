@@ -32,6 +32,11 @@ caused the two biggest rework episodes on record. THEN:
    - **Reference / published-data** — a committed reference fixture + tolerance the result must
      reproduce (e.g. a published label set, a prior table, a long-vs-short concordance). Acceptance
      test, not unit — record the source, the metric, and the pass/fail tolerance.
+   - **Shape checks (continuous validation)** — the expected counts, set equalities, sums and
+     ranges each step must satisfy, each with the outside source it is taken from. These are asserted
+     inline during `build` via `scripts/validate.{R,py,sh}` and land in `results/checks.log` and
+     `results/checks.tsv`. Record them here with their sources; contract and helper API in
+     `~/hub/knowledge/validation.md`.
    - **Biological controls** — housekeeping stability, expected markers; these stay the human
      output-QC / bio-sense checkpoints (run inline in `research-loop`), not automated. Note which controls apply.
    (Generic SDD skills like `to-prd`/`to-issues` are NOT the spec here — `brief.md` + ADRs are.)
@@ -47,7 +52,8 @@ caused the two biggest rework episodes on record. THEN:
 
 ## Output
 `docs/.record/brief.md` gains the chosen method + rationale + cited docs; QC thresholds AND validation
-fixtures (unit targets, reference fixture + tolerance, biological controls) recorded. This later
+fixtures (unit targets, reference fixture + tolerance, shape checks + their sources, biological
+controls) recorded. This later
 composes into the manuscript Methods.
 
 The build output must be deterministic code in a container (Docker/Singularity), not conda/pixi.
