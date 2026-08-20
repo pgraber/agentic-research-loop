@@ -1,6 +1,7 @@
 ---
 name: status
 description: Shows where an analysis stands and what to do next — reads the project filesystem, infers the loop position, and prints it with a "you are here" marker plus the next step; also gives a portfolio view across all projects. Use when the user asks "where am I", "what's next", "status", or "portfolio".
+model: sonnet
 ---
 
 # Status — where am I, what's next
