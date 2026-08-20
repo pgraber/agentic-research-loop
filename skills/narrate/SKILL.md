@@ -26,6 +26,10 @@ the glossary's terms.
   label, spell out abbreviations at first use); neutral standard definitions; professional academic
   grammar (tables/bullets welcome, no em dashes); clean code/math typesetting; a workflow overview
   where it helps; self-contained, theme-aware, sticky TOC; single-source glossary from `CONTEXT.md`.
+- **Validation table near the top of both renders** — check, expected, observed, status, source,
+  read from `results/checks.tsv` and never retyped. A result is not presented without the evidence
+  that its inputs were the right shape. In the learning render, explain what each check rules out.
+  Contract: `~/hub/knowledge/validation.md`.
 - **Numbers must match** — as a SEPARATE trace-check after the prose is drafted, not folded into
   writing it: go statistic by statistic and confirm every figure/number quoted equals the value in
   the `results/` file, reading the value fresh from the file rather than trusting what you just wrote.

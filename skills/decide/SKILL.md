@@ -1,6 +1,6 @@
 ---
 name: decide
-description: Logs a settled decision to the correct decisions log — the hub for strategic or cross-project calls, the project for analysis calls — dated from the system clock and committed. Use whenever a non-obvious decision is made: a threshold, a dropped sample, a change of direction, or a priority. The conversation is never the record.
+description: "Logs a settled decision to the correct decisions log — the hub for strategic or cross-project calls, the project for analysis calls — dated from the system clock and committed. Use whenever a non-obvious decision is made: a threshold, a dropped sample, a change of direction, or a priority. The conversation is never the record."
 ---
 
 # Decide — write it down so it doesn't evaporate

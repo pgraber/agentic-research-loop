@@ -16,8 +16,12 @@ analysis. A human ★ checkpoint — you surface findings; the user decides.
 - Anomalies — failed lanes, contamination flags, obvious outliers.
 
 ## Do
-1. Run a metric script over `data/raw/` (deterministic); AI interprets the output.
-2. Compare against expectations from `docs/.record/question.md`.
+1. Run a metric script over `data/raw/` (deterministic); AI interprets the output. The script asserts
+   the intake expectations through `scripts/validate.{R,py,sh}`, so sample count, read/cell counts and
+   sample-ID consistency land in `results/checks.log` as readable PASS/FAIL lines and are the first
+   entries in the run's validation record. Contract: `~/hub/knowledge/validation.md`.
+2. Compare against expectations from `docs/.record/question.md`, including the expected shapes
+   pre-registered at `scope`.
 3. Add a dated, tagged ("Intake QC") section to `docs/checkpoints.html` (create it, with a
    sticky-sidebar TOC + loop-status strip, if this is the project's first checkpoint): sample table + QC
    plots (reads/cells per sample, distributions, the sample-ID consistency check) inlined so the section

@@ -28,9 +28,16 @@ logged decisions, never silently re-derive or contradict them.
    thresholds after seeing results is p-hacking, even unintentionally. If the user asks to defer a
    threshold "until we see the results", hold the line: name the pre-registration reason and log the
    yardstick now; deferring it is the exact pattern this step exists to prevent.
-5. **Write `docs/.record/question.md`:** the question, the data, expected/surprising outcomes, the
-   finding + novelty + paper-fit, and the pre-registered thresholds and method intent.
-6. **Human approves the question and its point before proceeding** — do not infer approval from a
+5. **Pre-register the expected shapes too, not just the thresholds.** For each step whose size is
+   knowable in advance, write down the number and where it comes from: feature count from the
+   annotation, sample count from the sample sheet, expected n after a stated filter, sums and ranges
+   that must hold. These become the continuous-validation checks the build asserts line by line, and
+   the yardstick must come from outside the code that will produce the object. Contract:
+   `~/hub/knowledge/validation.md`.
+6. **Write `docs/.record/question.md`:** the question, the data, expected/surprising outcomes, the
+   finding + novelty + paper-fit, the pre-registered thresholds and method intent, and the expected
+   shapes with their sources.
+7. **Human approves the question and its point before proceeding** — do not infer approval from a
    "continue"; the framing call is the user's.
 
 ## Then

@@ -1,6 +1,6 @@
 ---
 name: office-hours
-description: Answers "what should I work on" when the user genuinely does not know. Weighs the current portfolio state against the north-star, spot-verifies the record against the artifacts it cites, names the one thing that moves a goal, and opens that track. NOT the default session opener where a SessionStart hook already injects portfolio state: when the user names the work, do that work instead of invoking this. Use on /office-hours, or when the user asks where to start or what matters most.
+description: "Answers \"what should I work on\" when the user genuinely does not know. Weighs the current portfolio state against the north-star, spot-verifies the record against the artifacts it cites, names the one thing that moves a goal, and opens that track. NOT the default session opener where a SessionStart hook already injects portfolio state: when the user names the work, do that work instead of invoking this. Use on /office-hours, or when the user asks where to start or what matters most."
 ---
 
 # Office Hours — answer "what should I work on", then start it
